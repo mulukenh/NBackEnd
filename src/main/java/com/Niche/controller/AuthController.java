@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.Niche.model.AuthRequestData;
+import com.Niche.model.LoginData;
 import com.Niche.model.Token;
 import com.Niche.model.User;
 import com.Niche.repository.UserRepository;
@@ -36,7 +36,7 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/authenticate")
-	public  ResponseEntity<?> getAuthenticationToken(@Valid @RequestBody AuthRequestData authData) throws Exception {
+	public  ResponseEntity<?> getAuthenticationToken(@Valid @RequestBody LoginData authData) throws Exception {
 		try {
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authData.getUsername(), authData.getPassword()));
 		} catch (BadCredentialsException e) {

@@ -1,11 +1,10 @@
 package com.Niche.model;
 
-public class AuthRequestData {
+public class LoginData {
 	private String username;
 	private String password;
 	
-	public AuthRequestData(String username, String password) {
-		super();
+	public LoginData(String username, String password) {
 		this.username = username;
 		this.password = password;
 	}
