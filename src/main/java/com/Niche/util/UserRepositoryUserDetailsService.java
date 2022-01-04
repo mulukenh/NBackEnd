@@ -1,4 +1,4 @@
-package com.Niche.security;
+package com.Niche.util;
 
 import java.util.Collection;
 import java.util.stream.Collectors;

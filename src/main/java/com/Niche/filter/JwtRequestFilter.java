@@ -15,8 +15,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.Niche.security.UserRepositoryUserDetailsService;
 import com.Niche.util.JwtUtil;
+import com.Niche.util.UserRepositoryUserDetailsService;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {

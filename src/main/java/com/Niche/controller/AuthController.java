@@ -8,15 +8,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Niche.model.AuthRequestData;
 import com.Niche.model.Token;
 import com.Niche.model.User;
-import com.Niche.security.UserRepositoryUserDetailsService;
+import com.Niche.repository.UserRepository;
 import com.Niche.util.JwtUtil;
+import com.Niche.util.UserRepositoryUserDetailsService;
 
 @RestController
 @RequestMapping("/api")
@@ -27,16 +30,26 @@ public class AuthController {
 	private UserRepositoryUserDetailsService userRepositoryUserDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
+	@Autowired
+	private UserRepository userRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/authenticate")
-	public  ResponseEntity<?> getAuthenticationToken(@Valid @RequestBody User user) throws Exception {
+	public  ResponseEntity<?> getAuthenticationToken(@Valid @RequestBody AuthRequestData authData) throws Exception {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authData.getUsername(), authData.getPassword()));
 		} catch (BadCredentialsException e) {
 			throw new Exception("Wrong username or password", e);
 		}
-		UserDetails userDetails = userRepositoryUserDetailsService.loadUserByUsername(user.getUsername());
+		UserDetails userDetails = userRepositoryUserDetailsService.loadUserByUsername(authData.getUsername());
 		String jwt = jwtUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new Token(jwt));
+	}
+	
+	@PostMapping("/register")
+	public ResponseEntity<?> saveUser(@RequestBody User user) throws Exception {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		return ResponseEntity.ok(userRepository.save(user));
 	}
 }
