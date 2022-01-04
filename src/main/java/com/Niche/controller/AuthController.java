@@ -27,7 +27,7 @@ public class AuthController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
-	private NicheUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService nicheUserDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
 	@Autowired
@@ -42,7 +42,7 @@ public class AuthController {
 		} catch (BadCredentialsException e) {
 			throw new Exception("Wrong username or password", e);
 		}
-		UserDetails userDetails = userRepositoryUserDetailsService.loadUserByUsername(authData.getUsername());
+		UserDetails userDetails = nicheUserDetailsService.loadUserByUsername(authData.getUsername());
 		String jwt = jwtUtil.generateToken(userDetails);
 		return ResponseEntity.ok(new ResponseToken(jwt));
 	}

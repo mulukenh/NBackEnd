@@ -23,14 +23,14 @@ import com.Niche.util.NicheUserDetailsService;
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private NicheUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService nicheUserDetailsService;
 	
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
     
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userRepositoryUserDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(nicheUserDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
 	@Override

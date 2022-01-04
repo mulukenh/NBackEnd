@@ -21,7 +21,7 @@ import com.Niche.util.NicheUserDetailsService;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
-	private NicheUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService nicheUserDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
 
@@ -39,7 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		}
 		
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails userDetails = this.userRepositoryUserDetailsService.loadUserByUsername(username);
+			UserDetails userDetails = this.nicheUserDetailsService.loadUserByUsername(username);
 			if (jwtUtil.validateToken(jwt, userDetails)) {
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
