@@ -1,9 +1,9 @@
 package com.Niche.model;
 
-public class Token {
+public class ResponseToken {
 	private final String jwt;
 
-	public Token(String jwt) {
+	public ResponseToken(String jwt) {
 		this.jwt = jwt;
 	}
 

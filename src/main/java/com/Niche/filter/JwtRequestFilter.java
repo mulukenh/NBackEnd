@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.Niche.util.JwtUtil;
-import com.Niche.util.UserRepositoryUserDetailsService;
+import com.Niche.util.NicheUserDetailsService;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 	@Autowired
-	private UserRepositoryUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService userRepositoryUserDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
 

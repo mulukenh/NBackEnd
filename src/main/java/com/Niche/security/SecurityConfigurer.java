@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.Niche.filter.JwtRequestFilter;
-import com.Niche.util.UserRepositoryUserDetailsService;
+import com.Niche.util.NicheUserDetailsService;
 
 @EnableWebSecurity
 @Configuration
@@ -23,7 +23,7 @@ import com.Niche.util.UserRepositoryUserDetailsService;
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserRepositoryUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService userRepositoryUserDetailsService;
 	
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;

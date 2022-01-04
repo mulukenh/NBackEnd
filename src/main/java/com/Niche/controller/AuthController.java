@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Niche.model.LoginData;
-import com.Niche.model.Token;
+import com.Niche.model.ResponseToken;
 import com.Niche.model.User;
 import com.Niche.repository.UserRepository;
 import com.Niche.util.JwtUtil;
-import com.Niche.util.UserRepositoryUserDetailsService;
+import com.Niche.util.NicheUserDetailsService;
 
 @RestController
 @RequestMapping("/api")
@@ -27,7 +27,7 @@ public class AuthController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
-	private UserRepositoryUserDetailsService userRepositoryUserDetailsService;
+	private NicheUserDetailsService userRepositoryUserDetailsService;
 	@Autowired
 	private JwtUtil jwtUtil;
 	@Autowired
@@ -44,7 +44,7 @@ public class AuthController {
 		}
 		UserDetails userDetails = userRepositoryUserDetailsService.loadUserByUsername(authData.getUsername());
 		String jwt = jwtUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new Token(jwt));
+		return ResponseEntity.ok(new ResponseToken(jwt));
 	}
 	
 	@PostMapping("/register")

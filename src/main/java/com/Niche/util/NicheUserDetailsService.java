@@ -14,10 +14,10 @@ import com.Niche.model.User;
 import com.Niche.repository.UserRepository;
 
 @Service
-public class UserRepositoryUserDetailsService implements UserDetailsService {
+public class NicheUserDetailsService implements UserDetailsService {
 	UserRepository userRepository;
 
-	public UserRepositoryUserDetailsService(UserRepository userRepository) {
+	public NicheUserDetailsService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
